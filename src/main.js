@@ -1,4 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
-createApp(App).mount('#app')
+// import './plugins/element.js'
+// import Element from 'element-ui'
+import './element-variables.scss'
+createApp(App)
+// .use(Element)
+.mount('#app')
