@@ -1,38 +1,44 @@
 <template>
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :before-remove="beforeRemove"
-  multiple
-  :limit="3"
-  :on-exceed="handleExceed"
-  :file-list="fileList">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <div class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
+  <input
+    type="file"
+    @change="modifyFile"
+  />
 </template>
 <script>
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        file: '',
       };
     },
     methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+      modifyFile(file) {
+        const {
+          target: {
+            files: [uploadFile]
+          }
+        } = file;
+        console.log(this.slice);
+        console.log(this.slice(uploadFile));
+              
       },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-      },
-      beforeRemove(file) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+      slice(file, piece = 1024 * 1024 * 5) {
+      let totalSize = file.size; // 文件总大小
+      let start = 0; // 每次上传的开始字节
+      let end = start + piece; // 每次上传的结尾字节
+      let chunks = []
+      while (start < totalSize) {
+        // 根据长度截取每次需要上传的数据
+        // File对象继承自Blob对象，因此包含slice方法
+        let blob = file.slice(start, end); 
+        chunks.push(blob)
+
+        start = end;
+        end = start + piece;
       }
+      return chunks
     }
+    },
+    
   }
 </script>
