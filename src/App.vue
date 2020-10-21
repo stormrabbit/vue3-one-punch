@@ -19,9 +19,13 @@
           }
         } = file;
         const size = uploadFile.size;
-        console.log(size %9);
-        console.log(this.slice(uploadFile, (size > 500*1024*1024) ? (size /10): 1024 * 1024 * 50));
+        const chunks = this.slice(uploadFile, (size > 500*1024*1024) ? (size /10): 1024 * 1024 * 50)
+        const self = this;
+        chunks.forEach(chunk => self.uploadChuck(chunk))
               
+      },
+      uploadChuck(chunk) {
+        console.log(chunk);
       },
       slice(file, piece = 1024 * 1024 * 50) {
       let totalSize = file.size; // 文件总大小
