@@ -1,8 +1,10 @@
 import { createApp } from 'vue'
-// import ElementPlus from 'element-plus';
-// import 'element-plus/lib/theme-chalk/index.css';
+import "nes.css/css/nes.min.css";
 import App from './App.vue';
+import installRouter from './plugins/router'
+import './assets/font/font.css';
+import './style/index.scss'
 
 const app = createApp(App)
-// app.use(ElementPlus)
+installRouter(app)
 app.mount('#app')

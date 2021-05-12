@@ -1,0 +1,26 @@
+html,
+body,
+input,
+textarea,
+select,
+button {
+  -webkit-tap-highlight-color: transparent;
+  font-weight: normal;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 1240px;
+  margin: 0;
+  padding: 0;
+  font-family: zpix, PingFang-SC-Regular, Hiragino Sans GB, WenQuanYi Micro Hei,;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  font-weight: normal;
+  margin: 0;
+}
